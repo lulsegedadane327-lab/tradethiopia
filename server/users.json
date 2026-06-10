@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1781080351715,
+    "name": "test",
+    "email": "test@exapl.com",
+    "password": "$2b$10$E2a9s0eMBH9BaH1p56KGYud25jkUoeQDLIqR8Hl7I.R02uhEuF48m"
+  },
+  {
+    "id": 1781080941899,
+    "name": "tst2",
+    "email": "test2@exapml.com",
+    "password": "$2b$10$in8EWlp2VQtSPN3IEjhKr.RpJQfVPmQkY/ZbYS0xFIcberQe8RRf."
+  }
+]
