@@ -21,12 +21,13 @@ function Dashboard({ setIsAuthenticated }) {
   }, []);
 
   useEffect(() => {
-    filterTasks();
-  }, [tasks, searchTerm, filterPriority, filterStatus]);
-
+  fetchTasks();
+  fetchStats();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
   const fetchTasks = async () => {
     const token = localStorage.getItem('token');
-    const res = await axios.get('http://localhost:5000/api/tasks', {
+    const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks', {
       headers: { 'x-auth-token': token }
     });
     setTasks(res.data);
@@ -34,7 +35,7 @@ function Dashboard({ setIsAuthenticated }) {
 
   const fetchStats = async () => {
     const token = localStorage.getItem('token');
-    const res = await axios.get('http://localhost:5000/api/tasks/stats', {
+    const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks/stats', {
       headers: { 'x-auth-token': token }
     });
     setStats(res.data);

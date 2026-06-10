@@ -19,11 +19,11 @@ function TaskForm({ task, onClose, onSave }) {
     const token = localStorage.getItem('token');
     
     if (task) {
-      await axios.put(`http://localhost:5000/api/tasks/${task._id}`, formData, {
+      await axios.put(`https://tradethiopia-theta.vercel.app/api/tasks/${task._id}`, formData, {
         headers: { 'x-auth-token': token }
       });
     } else {
-      await axios.post('http://localhost:5000/api/tasks', formData, {
+      await axios.post('https://tradethiopia-theta.vercel.app/api/tasks', formData, {
         headers: { 'x-auth-token': token }
       });
     }

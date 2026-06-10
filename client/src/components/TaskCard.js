@@ -48,7 +48,7 @@ function TaskCard({ task, onEdit, onDelete }) {
     if (result.isConfirmed) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5000/api/tasks/${task._id}`, {
+        await axios.delete(`https://tradethiopia-theta.vercel.app/api/tasks/${task._id}`, {
           headers: { 'x-auth-token': token }
         });
         
