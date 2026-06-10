@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "name": "task-manager",
   "builds": [
     {
       "src": "package.json",
@@ -9,6 +11,22 @@
     }
   ],
   "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/manifest.json",
+      "dest": "/manifest.json"
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico"
+    },
+    {
+      "src": "/asset-manifest.json",
+      "dest": "/asset-manifest.json"
+    },
     {
       "src": "/(.*)",
       "dest": "/index.html"
