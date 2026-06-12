@@ -15,30 +15,40 @@ function Dashboard({ setIsAuthenticated }) {
   const [filterPriority, setFilterPriority] = useState('All');
   const [filterStatus, setFilterStatus] = useState('All');
 
+  // 1. Fetch initial data on component mount
   useEffect(() => {
     fetchTasks();
     fetchStats();
   }, []);
 
+  // 2. FIX: Automatically filter tasks whenever raw tasks or filter criteria change
   useEffect(() => {
-  fetchTasks();
-  fetchStats();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    filterTasks();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tasks, searchTerm, filterPriority, filterStatus]);
+
   const fetchTasks = async () => {
-    const token = localStorage.getItem('token');
-    const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks', {
-      headers: { 'x-auth-token': token }
-    });
-    setTasks(res.data);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks', {
+        headers: { 'x-auth-token': token }
+      });
+      setTasks(res.data);
+    } catch (error) {
+      console.error("Error fetching tasks: - Dashboard.js:38", error);
+    }
   };
 
   const fetchStats = async () => {
-    const token = localStorage.getItem('token');
-    const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks/stats', {
-      headers: { 'x-auth-token': token }
-    });
-    setStats(res.data);
+    try {
+      const token = localStorage.getItem('token');
+      const res = await axios.get('https://tradethiopia-theta.vercel.app/api/tasks/stats', {
+        headers: { 'x-auth-token': token }
+      });
+      setStats(res.data);
+    } catch (error) {
+      console.error("Error fetching stats: - Dashboard.js:50", error);
+    }
   };
 
   const filterTasks = () => {
@@ -46,8 +56,8 @@ function Dashboard({ setIsAuthenticated }) {
     
     if (searchTerm) {
       filtered = filtered.filter(task => 
-        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        task.description.toLowerCase().includes(searchTerm.toLowerCase())
+        task.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        task.description?.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
     
